@@ -19,6 +19,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var photoImageView: UIImageView!
     
+    @IBOutlet weak var ratingControl: RatingControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
@@ -30,10 +32,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     }
 
     //MARK: Actions
-    
-    @IBAction func setDefaultLabelText(_ sender: UIButton) {
-        nameTextField.text = "Default Text"
-    }
+
     
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         // Hide the keyboard.

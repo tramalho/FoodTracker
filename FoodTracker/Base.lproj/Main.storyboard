@@ -23,38 +23,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="80S-2E-5Kz">
-                                <rect key="frame" x="16" y="40" width="343" height="447.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="565" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="80S-2E-5Kz">
+                                <rect key="frame" x="16" y="40" width="343" height="565"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r78-iN-WeP">
-                                        <rect key="frame" x="0.0" y="0.0" width="86.5" height="20.5"/>
+                                        <rect key="frame" x="128.5" y="0.0" width="86.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-sl-zvb">
-                                        <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="130" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-sl-zvb">
+                                        <rect key="frame" x="0.0" y="28.5" width="343" height="134.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdi-PY-EVo">
-                                        <rect key="frame" x="0.0" y="66.5" width="151" height="30"/>
-                                        <state key="normal" title="Set Default Label Text"/>
-                                        <connections>
-                                            <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="III-uZ-TU3"/>
-                                        </connections>
-                                    </button>
-                                    <imageView contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="defaultphoto" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-Vs-xYl">
-                                        <rect key="frame" x="0.0" y="104.5" width="343" height="343"/>
+                                    <imageView contentMode="scaleToFill" placeholderIntrinsicWidth="342.5" placeholderIntrinsicHeight="342.5" image="defaultphoto" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-Vs-xYl">
+                                        <rect key="frame" x="0.5" y="171" width="342" height="342"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="PYX-Vs-xYl" secondAttribute="height" multiplier="1:1" id="cpR-jp-bhM"/>
                                         </constraints>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="0.0" bottom="8" trailing="0.0"/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="90U-Dc-srd" appends="YES" id="Seq-Cd-0yG"/>
                                         </connections>
                                     </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="co4-jO-uEg" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
+                                        <rect key="frame" x="45.5" y="521" width="252" height="44"/>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PYX-Vs-xYl" secondAttribute="trailing" id="UeS-O1-jEn"/>
@@ -73,6 +70,7 @@
                         <outlet property="mealNameLabel" destination="r78-iN-WeP" id="H2Q-px-acg"/>
                         <outlet property="nameTextField" destination="VGS-sl-zvb" id="IHf-Hb-zaJ"/>
                         <outlet property="photoImageView" destination="PYX-Vs-xYl" id="Z79-0K-rXj"/>
+                        <outlet property="ratingControl" destination="co4-jO-uEg" id="mFA-N0-8q2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

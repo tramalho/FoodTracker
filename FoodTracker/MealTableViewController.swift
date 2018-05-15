@@ -14,30 +14,6 @@ class MealTableViewController: UITableViewController {
     //MARK: Properties
     var meals = [Meal]()
     
-    
-    //MARK: Private Methods
-    
-    private func loadSampleMeals() {
-        
-        let photo1 = UIImage(named: "meal1")
-        let photo2 = UIImage(named: "meal2")
-        let photo3 = UIImage(named: "meal3")
-        
-        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 4) else {
-            fatalError("Unable to instantiate meal1")
-        }
-        
-        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
-            fatalError("Unable to instantiate meal2")
-        }
-        
-        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
-            fatalError("Unable to instantiate meal2")
-        }
-        
-        meals += [meal1, meal2, meal3]
-    }
-    
     //MARK: Actions
     @IBAction func unwindToMealList(for sender: UIStoryboardSegue) {
         
@@ -56,6 +32,9 @@ class MealTableViewController: UITableViewController {
                 
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            
+            // Save the meals.
+            saveMeals()
         }
     }
     
@@ -65,9 +44,13 @@ class MealTableViewController: UITableViewController {
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
-        
-        // Load the sample data.
-        loadSampleMeals()
+
+        if let savedMeals = loadMeals() {
+            meals += savedMeals
+        } else {
+            // Load the sample data.
+            loadSampleMeals()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,6 +94,9 @@ class MealTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             meals.remove(at: indexPath.row)
+            
+            saveMeals()
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
@@ -152,5 +138,46 @@ class MealTableViewController: UITableViewController {
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
         }
+    }
+    
+    //MARK: Private Methods
+    
+    private func loadSampleMeals() {
+        
+        let photo1 = UIImage(named: "meal1")
+        let photo2 = UIImage(named: "meal2")
+        let photo3 = UIImage(named: "meal3")
+        
+        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 4) else {
+            fatalError("Unable to instantiate meal1")
+        }
+        
+        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
+            fatalError("Unable to instantiate meal2")
+        }
+        
+        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
+            fatalError("Unable to instantiate meal2")
+        }
+        
+        meals += [meal1, meal2, meal3]
+    }
+    
+    private func saveMeals() {
+        let isSuccessFullSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArcheveURL.path)
+        
+        var withMessage : StaticString = "Meals successfully saved."
+        var withType = OSLogType.debug
+        
+        if !isSuccessFullSave {
+            withMessage = "Failed to save meals..."
+            withType = OSLogType.error
+        }
+        
+        os_log(withMessage, log: .default, type: withType)
+    }
+    
+    private func loadMeals() -> [Meal]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArcheveURL.path) as? [Meal]
     }
 }
